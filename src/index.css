@@ -1,13 +1,956 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+#movies {
+    width: 1460px;
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+    background-color: #210026;
+}
+.header-img {
+    width: 1460px;
+    height: 100%;
+    overflow: hidden;
+}
+.header-title {
+    font-size: 100px;
+    position: absolute;
+    margin-top: 50px;
+    margin-left: 440px;
+    font-family: fantasy;
+    color: yellow;
+}
+.header-title-description {
+    font-size: 30px;
+    position: absolute;
+    margin-top: 200px;
+    margin-left: 550px;
+    font-family: sans-serif;
+    color: white;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.movie {
+    width: 300px;
+    height: 550px;
+    margin-left: 50px;
+    margin-bottom: 30px;
+    float: right;
+}
+.info-movie{
+    width: 270px;
+    margin-top: 15px;
+}
+
+
+.box-image{
+    max-height: 90%;
+}
+
+.movie-image {
+    max-height: 400px;
+}
+
+ .genre, .year{
+    margin-top: 10px;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.name {
+    margin-top: 0px;
+    color: white;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: none;
+    cursor: pointer;
+}
+.name:hover{
+    color: yellow;
+}
+.year{
+    color: aqua;
+}
+.short-description{
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+.pagination-buttons{
+    margin-left: 460px;
+    padding-bottom: 60px;
+}
+
+.increment-button{
+    width: 200px;
+    height: 50px;
+    margin-left: 100px;
+    border-radius: 25px;
+    font-size: 20px;
+    cursor: pointer;
+}
+.increment-button:active{
+    background-color: #4b0082;
+}
+.decrement-button{
+    width: 200px;
+    height: 50px;
+    border-radius: 25px;
+    font-size: 20px;
+    cursor: pointer;
+}
+.deccrement-button:active{
+    background-color: #4b0082;
+}
+
+.imdb-rating {
+    width: 60px;
+    height: 60px;
+    background-color: yellow;
+    border-radius: 30px;
+    margin-top: 10px;
+    margin-left: 10px;
+    position: absolute;
+    opacity: 0.8;
+    box-sizing: border-box;
+    font-weight: bold;
+    text-align: center;
+    border: 2px solid black;
+
+}
+.imdb {
+    font-size: 12px;
+    font-weight: bolder;
+}
+
+.kinopoisk-rating {
+    width: 60px;
+    height: 60px;
+    background-color: yellow;
+    border-radius: 30px;
+    margin-top: 10px;
+    margin-left: 200px;
+    position: absolute;
+    opacity: 0.8;
+    box-sizing: border-box;
+    font-weight: bold;
+    text-align: center;
+    border: 2px solid black;
+
+}
+.kinopoisk {
+    font-size: 12px;
+    font-weight: bolder;
+    line-height: 80%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.rating {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.inner-rating {
+    width: 60px;
+    height: 60px;
+    background-color: #00FF00;
+    border-radius: 30px;
+    margin-top: 10px;
+    margin-left: 107px;
+    position: absolute;
+    opacity: 0.8;
+    box-sizing: border-box;
+    font-weight: bold;
+    text-align: center;
+    border: 2px solid black;
+}
+.sf{
+    font-size: 12px;
+    font-weight: bolder;
+}
+
+.current-movie {
+    color: white;
+    width: 1480px;
+    height: 100%;
+    background-color: #210026;
+}
+
+.image-movie-page{
+    width: 500px;
+    float: left;
+    margin-left: 100px;
+    margin-right: 80px;
+    margin-top: 80px;
+    margin-bottom: 50px;
+}
+
+.movie-name{
+    margin-top: 50px;
+    font-size: 50px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: left;
+    color: bisque;
+}
+
+.movie-description{
+    margin-top: 40px;
+    font-size: 22px;
+    font-family: 'Times New Roman', Times, serif;
+    color: white;
+    line-height: 36px;
+    margin-bottom: 30px;
+    margin-left: 100px;
+    
+
+}
+.info-movie-page {
+    text-align: justify;
+    width: 95%;
+}
+.movie-actor, .movie-director, .movie-year{
+    padding-left: 100px;
+    font-size: 22px;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: justify;
+    color: white;
+    line-height: 36px;
+}
+
+.logo-movie-page{
+    max-width: 700px;
+    margin-top: 80px;
+    margin-bottom: 30px;
+}
+
+.video-frame {
+    width: 1000px;
+    height: 600px;
+    margin-left: 250px;
+    margin-top: 0px;
+}
+.href-movie{
+    text-decoration: none;
+    color: yellow;
+    cursor: pointer;
+}
+.top-link-to-main{
+    position: absolute;
+    margin-top: 20px;
+    margin-left: 650px;
+    text-decoration: none;
+    font-weight: bolder;
+    font-family: sans-serif;
+    font-size: 22px;
+    color:#151B54;
+    background-color: white;
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 25px;
+    border-radius: 25px;
+}
+.top-link-to-main:active {
+    color:#151B54;
+    background-color: yellow
+}
+.bottom-link-to-main{
+    position: absolute;
+    margin-top: 20px;
+    margin-left: 650px;
+    font-weight: bolder;
+    font-family: sans-serif;
+    text-decoration: none;
+    font-size: 22px;
+    color:#151B54;
+    border: 0px;
+    background-color: white;
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 25px;
+    border-radius: 25px;
+}
+.bottom-link-to-main:active {
+    color:#151B54;
+    background-color: yellow
+}
+.div-bottom-link-to-main{
+    padding-bottom: 120px;
+    padding-top: 50px;
+}
+.imdb-rating-movie{
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    background-color: yellow;
+    position: absolute;
+    margin-top: 100px;
+    margin-left: 120px;
+    color: black;
+    box-sizing: border-box;
+    text-align: center;
+    padding-top: 10px;
+}
+.inner-rating-movie{
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    background-color: #00FF00;
+    position: absolute;
+    margin-top: 100px;
+    margin-left: 300px;
+    color: black;
+    box-sizing: border-box;
+    text-align: center;
+    padding-top: 10px;   
+}
+.rating-movie {
+    font-weight: bolder;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 40px;
+    text-align: center;
+}
+.imdb-movie {
+    font-weight: bolder;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+.kinopoisk-movie, .inner-movie {
+    font-weight: bolder;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+.kinopoisk-rating-movie{
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    background-color: yellow;
+    position: absolute;
+    margin-top: 100px;
+    margin-left: 500px;
+    color: black;
+    box-sizing: border-box;
+    text-align: center;
+    padding-top: 10px;
+} 
+
+
+
+.rating-round {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid black;
+    color:  black;
+    background-color: #E3F2FD;
+    display: inline-block;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 10px;
+    margin-left: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.rating-round-wrap {
+    margin-left: 50px;
+}
+.inputs-on-movie-page{
+    margin-left: 60px;
+    margin-top: 30px;
+}
+.input-on-movie-page1{
+    width: 360px;
+    height: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 26px;
+    border-radius: 10px 0px 0px 10px;
+    outline: none;
+    box-sizing: border-box;
+    padding-left: 10px;
+    background-color: #E3F2FD;
+}
+.input-on-movie-page2{
+    width: 360px;
+    height: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 26px;
+    border-radius: 0px 10px 10px 0px;
+    outline: none;
+    box-sizing: border-box;
+    padding-left: 10px;
+    background-color: #E3F2FD;
+}
+.textarea-comment{
+    height: 200px;
+    width: 720px;
+    border-radius: 10px;
+    margin-left: 60px;
+    margin-top: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 26px;
+    outline: none;
+    box-sizing: border-box;
+    padding-left: 10px;
+    background-color: #E3F2FD;
+}
+.button-send-comment{
+    margin-left: 60px;
+    width: 150px;
+    height: 32px;
+    background-color: #E3F2FD;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 16px;
+    cursor: pointer;
+    margin-top: 30px;
+}
+.button-send-comment:active {
+    background-color: yellow;
+}
+.link-to-movie {
+    margin-top: 30px;
+    height: 200px;
+    color: white;
+    padding-left: 100px;
+    font-size: 30px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.filter {
+    width: 222px;
+    height: 40px;
+    margin-left: 30px;
+    cursor: text;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 26px;
+    padding-left: 10px;
+    border-radius: 5px;
+    outline: none;
+    background-color: #E3F2FD;
+}
+.rating-change{
+    width: 222px;
+    height: 44px;
+    margin-left: 30px;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 26px;
+    padding-left: 10px;
+    outline: none;
+    border-radius: 5px;
+    background-color: #E3F2FD
+}
+
+.menu {
+    margin-top: 50px;
+    margin-bottom: 60px;
+    border: 3px solid #E3F2FD;
+    padding: 20px;
+    margin-left: 50px;
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 1320px;
+    border-radius: 10px;
+}
+
+.comment-man{
+    color: black;
+    width: 710px;
+    height: 150px;
+    border: 3px solid white;
+    border-radius: 10px;
+    margin-left: 60px;
+    margin-top: 30px;
+    overflow-y: auto;
+    position: relative;
+}
+
+.comments{
+    background-color: #210026;
+}
+
+.name-comment-man {
+    padding-left: 10px;
+    padding-bottom: 10px;
+    border: 0px;
+    color: yellow;
+    font-size: 28px;
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+.comment-text{
+    color: white;
+    font-size: 24px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-left: 10px;
+}
+.inner-rating-man{
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    position: absolute;
+    top: 5px;
+    left: 665px;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 22px;
+    font-weight: bolder;
+    text-align: center;
+    box-sizing: border-box;
+    padding-top: 8px;
+} 
+/*---------------------950px-1350px-------------------------*/
+@media (max-width:1350px) and (min-width:950px){
+  #movies {  
+    width: 1135px;
+  }
+  .header-img {
+    width: 1055px;
+  }  
+  .header-title {
+     font-size: 70px;
+     margin-top: 40px;
+    margin-left: 320px;
+  }
+  .header-title-description {
+    font-size: 28px;
+    margin-top: 135px;
+    margin-left: 380px;
+ }
+ .menu {
+    width: 962px;
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+.movie {
+    margin-bottom: 20px;
+}
+.filter {
+    width: 158px;
+    height: 30px;
+    margin-left: 24px;
+    font-size: 22px;
+}
+.rating-change{
+    width: 158px;
+    height: 34px;
+    margin-left: 24px;
+    font-size: 22px;
+}
+.pagination-buttons{
+    margin-left: 300px;
+}
+.image-movie-page{
+    width: 400px;
+    margin-left: 60px;
+    margin-right: 40px;
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+.logo-movie-page{
+    width: 550px;
+}
+.info-movie-page{
+    width: 99%;
+    margin-left: -50px;
+}
+.current-movie {
+    width: 1095px;
+}
+.movie-name{
+    margin-top: 40px;
+    font-size: 40px;
+}
+.imdb-rating-movie{
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    margin-top: 60px;
+    margin-left:80px;
+    padding-top: 10px;
+}
+.kinopoisk-rating-movie{
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    margin-top: 60px;
+    margin-left: 360px;
+    padding-top: 10px;
+}
+.inner-rating-movie{
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    margin-top: 60px;
+    margin-left: 226px;
+    padding-top: 10px;
+}
+.video-frame {
+    margin-left: 50px;
+    margin-top: -100px;
+}
+.top-link-to-main{
+    margin-left: 500px;
+}
+.bottom-link-to-main{
+    margin-left: 500px;
+}
+
+}
+/*--------------------650px-949px-------------------------*/
+
+@media (max-width: 949px) {
+    #movies {  
+        width: 740px;
+      }
+      .header-img {
+        width: 740px;
+      } 
+      .header-title {
+        font-size: 50px;
+        margin-top: 23px;
+       margin-left: 230px;
+     }
+    .header-title-description {
+        opacity: 0;
+    }
+
+    .menu {
+        width: 650px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .movie {
+        margin-top: 10px;
+        width: 230px;
+         height: 375px;
+        margin-left: 50px;
+        margin-right: -50px;
+        margin-bottom: 80px;
+    }
+    .movie-image {
+        max-height: 280px;
+    }
+    .rating-change{
+        width: 100px;
+        height: 30px;
+        margin-left: 20px;
+        font-size: 16px;
+    }
+    .filter {
+        width: 100px;
+        height: 26px;
+        margin-left: 20px;
+        font-size: 20px;
+    }
+    .imdb-rating {
+        width: 50px;
+        height: 50px;
+        border-radius: 25px;
+        margin-left: 10px;
+    }
+    .kinopoisk-rating {
+        width: 50px;
+        height: 50px;
+        border-radius: 25px;
+        margin-left: 130px;
+        text-align: center;
+    }
+    
+    .inner-rating {
+        width: 50px;
+        height: 50px;
+        border-radius: 25px;
+        margin-left: 70px;     
+    }
+
+    .kinopoisk {
+        font-size: 10px;
+        font-weight: bolder;
+        line-height: 80%;
+    }
+    .info-movie{
+        width: 210px;
+    }
+    .pagination-buttons{
+        margin-left: 130px;
+    }
+    .image-movie-page{
+        width: 250px;
+        margin-left: 40px;
+        margin-right: 40px;
+        margin-top: 30px;
+    }
+    .logo-movie-page{
+        width: 400px;
+    }
+    .top-link-to-main{
+        margin-left: 450px;
+    }
+    .bottom-link-to-main{
+        margin-left: 400px;
+    }
+    .info-movie-page{
+        width: 800px;
+        margin-left: -60px;
+        margin-top: -30px;
+    }
+    .movie-name{
+        margin-top: 10px;
+        font-size: 30px;
+    }
+    .imdb-rating-movie{
+        width: 60px;
+        height: 60px;
+        border-radius: 30px;
+        margin-top: 40px;
+        margin-left:50px;
+        padding-top: 10px;
+    }
+    .kinopoisk-rating-movie{
+        width: 60px;
+        height: 60px;
+        border-radius: 30px;
+        margin-top: 40px;
+        margin-left: 220px;
+        padding-top: 10px;
+    }
+    .inner-rating-movie{
+        width: 60px;
+        height: 60px;
+        border-radius: 30px;
+        margin-top: 40px;
+        margin-left: 140px;
+        padding-top: 10px;
+    }
+    .rating-movie {
+        font-size: 26px;
+    }
+    .kinopoisk-movie {
+        font-size: 12px;
+    }
+    .video-frame {
+        margin-left: 50px;
+        margin-top: -70px;
+        width: 700px;
+        height: 400px;
+    }
+    .bottom-link-to-main{
+        margin-left: 320px;
+        margin-top: -20px;
+    }
+   .textarea-comment{
+    margin-left: 50px;
+    width: 700px;
+   }
+   .inputs-on-movie-page{
+    margin-left: 50px;
+   }
+   .input-on-movie-page1, .input-on-movie-page2{
+    width: 350px;
+   }
+   .button-send-comment{
+    margin-left: 50px;
+   }
+   .rating-round-wrap{
+    margin-top: -50px;
+   }
+   .comments{
+    margin-top: 60px;
+   }
+   .comment-man{
+    margin-left: 50px;
+    width: 700px;
+   }
+   .inner-rating-man{
+    left: 655px;
+   }
+}
+
+ /*--------------------649px--------------------------*/
+
+ @media (max-width: 649px){
+    #movies {  
+        width: 525px;
+      }
+      .header-img {
+        width: 515px;
+      } 
+      .menu {
+        margin-top: -7px;
+        margin-bottom: -10px;
+        width: 480px;
+        border: 0px;
+        margin-left: 0px;
+    }
+    .header-title {
+        font-size: 32px;
+        margin-top: 18px;
+       margin-left: 165px;
+     }
+     .header-title-description {
+       font-size: 18px;
+       margin-top: 70px;
+       margin-left: 165px;
+    }
+    .rating-change{
+        width: 90px;
+        height: 30px;
+        margin-left: 0px;
+        font-size: 13px;
+        font-weight: bold;
+        margin-top: -6px;
+    }
+    .filter {
+        width: 80px;
+        height: 26px;
+        margin-left: 0px;
+        font-size: 20px;
+        margin-top: 2px;
+    }
+
+    .pagination-buttons{
+        margin-left: 50px;
+    }
+    .increment-button{
+        width: 100px;
+        margin-left: 70px;
+    }
+    .decrement-button{
+        width: 100px;
+    }
+    .image-movie-page{
+        width: 186px;
+        margin-top: 60px;
+        margin-left: 20px;
+        margin-bottom: 10px;
+    }
+
+    .top-link-to-main{
+        font-size: 16px;
+        width: 95px;
+        margin-left: 200px;
+        margin-top: 10px;
+        text-align: center;
+    }
+    .bottom-link-to-main{
+        font-size: 16px;
+        width: 95px;
+        margin-left: 200px;
+        margin-top: -20px;
+        text-align: center;
+    }
+    .imdb-rating-movie{
+        width: 50px;
+        height: 50px;
+        border-radius: 25px;
+        margin-top: 70px;
+        margin-left:30px;
+        padding-top: 0px;
+        border: 2px solid black;
+    }
+    .kinopoisk-rating-movie{
+        width: 50px;
+        height: 50px;
+        border-radius: 25px;
+        margin-top: 70px;
+        margin-left: 150px;
+        padding-top: 0px;
+        border: 2px solid black;
+    }
+    .inner-rating-movie{
+        width: 50px;
+        height: 50px;
+        border-radius: 25px;
+        margin-top: 70px;
+        margin-left: 90px;
+        padding-top: 0px;
+        border: 2px solid black;
+    }
+    .rating-movie {
+        font-size: 26px;
+    }
+    .kinopoisk-movie {
+        font-size: 12px;
+    }
+
+    .rating-movie{
+        font-size: 22px;
+    }
+    .info-movie-page{
+        width: 570px;
+        margin-left: 20px;
+    }
+    .logo-movie-page{
+        width: 230px;
+    }
+    .rating-movie{
+        font-size: 22px;
+        font-weight: bold;
+    }
+    .imdb-movie{
+        font-size: 12px;
+    }
+    .inner-movie{
+        font-size: 12px;
+    }
+    .kinopoisk-movie{
+        font-size: 12px;
+    }
+    .video-frame {
+        margin-left: 20px;
+        margin-top: -90px;
+        width: 500px;
+        height: 230px;
+    }
+    .movie-description{
+        margin-left: 0px;
+        margin-top: 0px;
+    }
+    .movie-director, .movie-actor, .movie-year{
+        margin-left: -100px;
+    }
+    .link-to-movie{
+        margin-left: -100px;
+    }
+    .info-movie-page{
+        width: 500px;
+    }
+    .movie-name{
+        margin-left: 300px;
+    }
+    .textarea-comment{
+        margin-left: 20px;
+        width: 500px;
+       }
+       .inputs-on-movie-page{
+        margin-left: 20px;
+       }
+       .input-on-movie-page1, .input-on-movie-page2{
+        width: 250px;
+       }
+       .button-send-comment{
+        margin-left: 20px;
+       }
+       .rating-round-wrap{
+        margin-top: -50px;
+       }
+       .comments{
+        margin-top: 0px;
+       }
+       .comment-man{
+        margin-left: 20px;
+        width: 500px;
+       }
+       .inner-rating-man{
+        left: 455px;
+       }
+       .rating-round-wrap{
+        margin-left: 10px;
+        margin-top: -80px;
+       }
+       .rating-round{
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        margin-left: 6px;
+        padding-top: 7px;
+       }
 }

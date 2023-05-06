@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Routes, Route} from "react-router-dom";
+import NotFound from "./pages/NotFound";
+import MovieContainer from "./containers/MovieContainer";
+import MainContainer from "./containers/MainContainer";
+
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  <>
+    <header>
+      <div className="header-title">SCIENCE FICTION</div>
+      <div className="header-title-description">фантастические фильмы</div>
+      <img className="header-img" src={require("./fiction1.jpg")} alt="cinema"></img>
+    </header>
+    <Routes>
+      <Route path="/" element={<MainContainer/>}/>  
+      <Route path="/film/:id" element={<MovieContainer/>}/> 
+      <Route path="*" element={<NotFound/>}/>  
+    </Routes>
+  </>    
   );
 }
 
