@@ -8,7 +8,7 @@ const sagaMiddleware = createSagaMiddleware();
 const loadState = () => {
     let preloadedState = localStorage.getItem('reduxStateMovies');
 
-    if(preloadedState === null){
+    if (preloadedState === null){
         return;
     }
     return JSON.parse(preloadedState);

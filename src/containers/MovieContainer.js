@@ -7,9 +7,9 @@ const mapStateToProps = (state) => {
     })
 }
 
-const mapDispatchToProps = (dispatch) =>{
+const mapDispatchToProps = (dispatch) => {
     return ({
-      addActivity: (activity)=> dispatch({type: "ADD_ACTIVITY", activity})
+      addActivity: (activity) => dispatch({ type: "ADD_ACTIVITY", activity })
     })
 }
 

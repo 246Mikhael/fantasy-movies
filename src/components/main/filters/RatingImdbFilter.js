@@ -9,26 +9,15 @@ function RatingImdbFilter({
     resetPage
     }){
 
-    
-    let style;
-
-    if(idSelect !== 0 && idSelect !== id ){
-    style ={
-        pointerEvents: 'none',
-        opacity: 0.5,
-    }
-    if(idSelect === id){
-       style = {
-        opacity: 1
-       } 
-    }
-}
-   
-    return <select style={style} className="rating-change" onChange={(event)=>{
-    
-        ratingImdbFilter(Number(event.target.value));
-        getIdSelect(event.target.value? id: 0);
-        resetPage();
+    return <select 
+        id={(idSelect !== 0 && idSelect !== id) ? 
+            'inactive' : 
+            'active'}
+        className="rating-change" 
+        onChange={(event)=>{
+            ratingImdbFilter(Number(event.target.value));
+            getIdSelect(event.target.value ? id: 0);
+            resetPage();
         }}>
         <option value=''>IMDb все</option>
         <option value='8'>IMDb выше 8</option>

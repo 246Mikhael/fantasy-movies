@@ -1,9 +1,19 @@
 import React from "react";
 
-function PageUp({increment, style}){
-    return <button className="increment-button"
-    style={style}
-     onClick={()=>increment()}>вперед</button>
+function PageUp({ 
+     increment,
+     lastPage,
+     lengthOfArr,
+     pages
+    }){
+    return <button 
+        className="increment-button"
+        id={lastPage >= lengthOfArr-1 ||
+           lastPage >= pages ?  
+           'inactive' : 'active'}
+        onClick={()=>increment()}>
+          вперед
+     </button>
 }
 
 export default PageUp;

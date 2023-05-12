@@ -2,20 +2,19 @@ import {put, select, takeEvery, fork} from 'redux-saga/effects';
 
 const API_KEY = "QV9YA96-D2F46WY-N485YXW-EE917BN"; 
 
- async function getMovies(url){
-    const resp = await fetch(url, {
+async function getMovies(url){
+   const resp = await fetch(url, {
         headers: {
             "Content-Type": "application/json",
             "X-API-KEY": API_KEY,
         },
     });
     const respData = await resp.json();
-   return respData;
- }
+  return respData;
+}
 
 export function* workerSaga1(){
-
-  
+   
   const store = yield select();
   const page = store.dataOfMovies.page;
   const country = store.dataOfMovies.currentCountry;
@@ -28,17 +27,17 @@ export function* workerSaga1(){
   let addRatingImdb = '';
   let addRatingKp = '';
 
-  if(country){
+  if (country){
     addCountry = `${'&countries.name='}${country}`
   }
-  if(year){
+  if (year){
     addYear = `${'&year='}${year}`
   }
-  if(ratingImdb){
+  if (ratingImdb){
     addRatingImdb = `${'&rating.imdb='}${ratingImdb}${-10}`
   }
 
-  if(ratingKp){
+  if (ratingKp){
     addRatingKp = `${'&rating.kp='}${ratingKp}${-10}`
   }
 
@@ -55,30 +54,7 @@ export function* workerSaga2({id}){
   const data = yield getMovies(`${'https://api.kinopoisk.dev/v1/movie/'}${id}`)
   yield put({type:"MOVIE_ADD_TO_STORE", data});
 }
-/*
-export function* workerSaga3({arrOfIds}){
- yield console.log(arrOfIds);
- let arr = [];
 
- for(let elem of arrOfIds){
-   let data = yield getMovies(
-    `${'https://api.kinopoisk.dev/v1/movie/'}${elem}`);
-   arr.push({
-    name: data.name,
-    year: data.year,
-    id: data.id,
-    description: data.description,
-    poster: data.poster,
-    rating: data.rating
-   })  
- }
- 
-  yield console.log(arr);
-  if(arr.length > 0){
-  yield put({type:"ADD_TO_STORE_FILTRED_MOVIES", ARR});
- }
-}
-*/
 export function* watchMainPage(){
  yield takeEvery( "MAIN_PAGE", workerSaga1)
 }
@@ -110,11 +86,7 @@ export function* watchMainPageUp(){
  export function* watchKpRatingFilter(){
   yield takeEvery( "KP_FILTER", workerSaga1)
  }
- /*
- export function* watchFiltredMovies(){
-  yield takeEvery('FILTRED_IDS', workerSaga3 )
- }
-*/
+ 
 export default function* rootSaga(){
    yield fork (watchMainPage);
    yield fork (watchMainPageUp);
@@ -124,5 +96,4 @@ export default function* rootSaga(){
    yield fork (watchYearFilter);
    yield fork (watchImdbRatingFilter);
    yield fork (watchKpRatingFilter);
-   //yield fork (watchFiltredMovies)
 }

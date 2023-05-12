@@ -16,9 +16,9 @@ export default function activitiesOfMovies (state = initialState, action){
                 activities:
                 {...state.activities, [action.activity.id]:
                     {movie:[{email: action.activity.email,
-                      nameOfUser: action.activity.nameOfUser,
-                      text: action.activity.text,
-                      innerRating: action.activity.innerRating
+                            nameOfUser: action.activity.nameOfUser,
+                            text: action.activity.text,
+                            innerRating: action.activity.innerRating
                     }],
                     year: action.activity.year,
                     countries: action.activity.countries,
@@ -36,14 +36,14 @@ export default function activitiesOfMovies (state = initialState, action){
          const found = movieId.movie.find(obj => {
             return obj.email === action.activity.email;
          })
-          if(!found){
+          if (!found){
             return Object.assign({}, state, {
                 activities:
                 {...state.activities, [action.activity.id]:
                   {movie:[{email: action.activity.email,
-                    nameOfUser: action.activity.nameOfUser,
-                    text: action.activity.text,
-                    innerRating: action.activity.innerRating,
+                           nameOfUser: action.activity.nameOfUser,
+                           text: action.activity.text,
+                           innerRating: action.activity.innerRating,
                 }].concat(movieId.movie),
                   year: action.activity.year,
                   countries: action.activity.countries,

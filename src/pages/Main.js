@@ -25,238 +25,249 @@ export default function Main({
 
 }){
 
-    const dispatch = useDispatch();
+const dispatch = useDispatch();
 
-    useEffect(()=>{
-      dispatch({type:'MOVIE_PAGE', id: undefined})
-      dispatch({type:'MAIN_PAGE'})
+useEffect(()=>{
+    dispatch({ type:'MOVIE_PAGE', id: undefined })
+    dispatch({ type:'MAIN_PAGE' })
     },[dispatch])
      
-     const docs = state.dataOfMovies.movies.docs;
-     const pages = state.dataOfMovies.movies.pages;
-     const page = state.dataOfMovies.page;
-     const movieWithActivities = state.activitiesOfMovies.activities;
+const docs = state.dataOfMovies.movies.docs;
+const pages = state.dataOfMovies.movies.pages;
+const page = state.dataOfMovies.page;
+const movieWithActivities = state.activitiesOfMovies.activities;
 
-     const[idSelect, setIdSelect] = useState(0);
+const[idSelect, setIdSelect] = useState(0);
 
-     function getIdSelect(id){
-      setIdSelect(id)
-     }
+function getIdSelect(id){
+    setIdSelect(id)
+}
 
-     function getAverageRating(obj, id){
-      if(id in obj){
+function getAverageRating(obj, id){
+    if (id in obj){
         return obj[id].averageRating
-      } else {
+    } else {
         return undefined
-      }
-     }
+    }
+}
 
-   function filterMoviesByInnerRating(obj, rating){
-      
-     let arr = [];
+function filterMoviesByInnerRating(obj, rating){
+    let arr = [];
+
       for (let key in obj){
-        if(obj[key].averageRating >= rating){
-          let obj1 = obj[key];
-          obj1.id = key;
-          arr.push(obj1)
+        if (obj[key].averageRating >= rating){
+            let obj1 = obj[key];
+            obj1.id = key;
+            arr.push(obj1)
         }
       }
       return arr;   
-     }
+}
     
-   function filterByYearMoviesWithActivities(arr, year, rating){
+function filterByYearMoviesWithActivities(arr, year, rating){
       
-      if(year  && rating > 1){
+    if (year && rating > 1){
         let arr1 = [];
-        for(let elem of arr){
-          if(elem.year === Number(year)){
-          console.log(typeof elem.year)
-          console.log(typeof year)
-            arr1.push(elem)
-          }
+
+        for (let elem of arr){
+            if (elem.year === Number(year)){
+                arr1.push(elem)
+            }
         }
+         return arr1;
+    } else {
+          return arr;
+    }
+}
+
+function filterByCountryMoviesWithActivities(
+  arr, 
+  func, 
+  country, 
+  rating){
+      if(country && rating > 1){
+          let arr1 = [];
+
+          for(let elem of arr){
+              if(func(elem.countries, country)){
+                  arr1.push(elem)
+              }
+           }
         return arr1;
       } else {
-        return arr;
+         return arr;
       }
-       
-     }
+}
 
-     function filterByCountryMoviesWithActivities(arr, func, country, rating){
-      if(country  && rating > 1){
-
-        let arr1 = [];
-        for(let elem of arr){
-          if(func(elem.countries, country)){
-            arr1.push(elem)
-          }
-        }
-        return arr1;
-      } else {
-        return arr;
-      }
-     }
-
-     function findCountry(arr, country){
-      let flag = false;
-      console.log(arr)
+function findCountry(arr, country){
+    let flag = false;
+      
        for(let elem of arr){
-        if(elem.name === country){
-          flag =  true;
+           if(elem.name === country){
+              flag =  true;
+            } 
         } 
-       } return flag;
-     }
+        return flag;
+}
 
-     function getIdsOfFilteredMovies(arr){
-      let arr1 = [];
-      for(let elem of arr){
-        arr1.push(elem.id)
-      }
-      return arr1;
-     }
+function getIdsOfFilteredMovies(arr){
+    let arr1 = [];
 
-    function calcRange(numOfPage){
-      const min = (numOfPage - 1) * 12;
-      const max = min + 11
-      return {min: min,
-              max: max}
-    } 
+        for(let elem of arr){
+            arr1.push(elem.id)
+        }
+    return arr1;
+}
 
-    //console.log(calcRange(page).min)
+function calcRange(numOfPage){
+    const min = (numOfPage - 1) * 12;
+    const max = min + 11
+      
+    return {
+      min: min,
+      max: max}
+} 
 
-    const filtredByInnerRating = filterMoviesByInnerRating(
-      movieWithActivities, currentInnerRating);
+const filtredByInnerRating = filterMoviesByInnerRating(
+    movieWithActivities, 
+    currentInnerRating);
 
-   const filtredByYear = filterByYearMoviesWithActivities(
-      filtredByInnerRating, currentYear, currentInnerRating);
+const filtredByYear = filterByYearMoviesWithActivities(
+    filtredByInnerRating, 
+    currentYear, 
+    currentInnerRating);
 
-   const filtredByCountry = filterByCountryMoviesWithActivities(
-    filtredByYear,findCountry,currentCountry, currentInnerRating
-   )
+const filtredByCountry = filterByCountryMoviesWithActivities(
+    filtredByYear,
+    findCountry,
+    currentCountry, 
+    currentInnerRating)
 
-   const filtredMoviesIds = getIdsOfFilteredMovies(filtredByCountry);
+const filtredMoviesIds = getIdsOfFilteredMovies(filtredByCountry);
 
-     let style;
-     if(page === 1){
-      style = {
-        pointerEvents: 'none',
-        opacity: 0.5,
-      } 
-     }
-
-     let style1;
-     const arr = [];
+const arr = [];
+let lastPage;
      
+let result;
 
-     let result;
-
-     if(docs !== undefined && idSelect !== 3){
-     result = docs.map(doc=>{
-     const averageRating = getAverageRating(movieWithActivities, doc.id);
+    if(docs !== undefined && 
+        idSelect !== 3){
+        result = docs.map(doc=>{
+            const averageRating = getAverageRating(movieWithActivities, doc.id);
  
-        return <div key={doc.id} className="movie" >
-            <div className="box-image">
-              <div className="imdb-rating">
-                <span className="imdb">IMDb</span><br/>
-                <span className="rating">{doc.rating.imdb}</span>
+              return <div 
+                  key={doc.id} 
+                  className="movie" >
+                      <div className="box-image">
+                          <div className="imdb-rating">
+                              <span className="imdb">
+                                  IMDb
+                              </span><br/>
+                              <span className="rating">
+                                  {doc.rating.imdb}
+                              </span>
+                          </div>
+                          <div className="inner-rating">
+                              <span className="sf">
+                                  SF
+                              </span><br/>
+                              <span className="rating">
+                                  {averageRating ?
+                                  (averageRating).toFixed(1): 0}
+                              </span>
+                          </div>
+                          <div className="kinopoisk-rating">
+                              <span className="kinopoisk">
+                                  КП
+                              </span><br/>
+                              <span className="rating">
+                                  {(doc.rating.kp).toFixed(1)}
+                              </span>
+                          </div>
+                          <Link className="name"
+                              to={{pathname:`/film/${doc.id}`}}>
+                              <img className="movie-image"
+                                   src={doc.poster.url}
+                                   alt="poster"></img>
+                                   {doc.name}
+                          </Link>
+                      </div>
+                      <div className="info-movie">
+                          <p className="year">
+                              {doc.year}
+                          </p>
+                          <p className="short-description">
+                              {doc.description.slice(0, 55) + '...'}</p>
+                     </div>
             </div>
-            <div className="inner-rating">
-                 <span className="sf">SF</span><br/>
-                 <span className="rating">{averageRating ?
-                 (averageRating).toFixed(1): 0}</span>
-            </div>
-            <div className="kinopoisk-rating">
-                <span className="kinopoisk">кинопоиск</span><br/>
-                <span className="rating">{(doc.rating.kp).toFixed(1)}</span>
-            </div>
-            
-              <img className="movie-image" 
-              src={doc.poster.url}
-               alt="poster"></img>
-            </div>
-            
-            <div className="info-movie">
-                 <Link className="name"
-                  to={{pathname:`/film/${doc.id}`}}>
-                    {doc.name}
-                    </Link>
-              
-              <p className="year">
-                {doc.year}</p>
-              <p className="short-description">
-                {doc.description.slice(0, 55) + '...'}</p>
-            </div>
-         </div>
-     })
+        })
     };
 
-    if(movieWithActivities !== undefined && idSelect === 3){
+    if (movieWithActivities !== undefined && idSelect === 3){
         
-      for (let key in movieWithActivities){
-        if(filtredMoviesIds.indexOf(movieWithActivities[key].id) > -1){
-          arr.push(movieWithActivities[key])
+        for (let key in movieWithActivities){
+             if(filtredMoviesIds.indexOf(movieWithActivities[key].id) > -1){
+                 arr.push(movieWithActivities[key])
+             }
         }
-      }
+      
+        lastPage = (calcRange(page).max);
+        result = arr.map((item, i)=>{
 
-      console.log(calcRange(page).max);
-      console.log(arr.length)
-
-      if(calcRange(page).max >= arr.length-1 || page >= pages){
-        
-        style1 = {
-          pointerEvents: 'none',
-          opacity: 0.5,
-         }
-        } else {
-          style1 = {
-            opacity: 1,
-          }
-       }
-
-      result = arr.map((item, i)=>{
-  
-         if(i >= calcRange(page).min && 
-            i <= calcRange(page).max 
-          ){
-           return <div key={i} className="movie" >
+            if (i >= calcRange(page).min && 
+               i <= calcRange(page).max){
+             return <div key={i} className="movie" >
                <div className="box-image">
                  <div className="imdb-rating">
-                   <span className="imdb">IMDb</span><br/>
-                   <span className="rating">{item.rating.imdb}</span>
-               </div>
-               <div className="inner-rating">
-                    <span className="sf">SF</span><br/>
-                    <span className="rating">{item.averageRating}</span>
-               </div>
-               <div className="kinopoisk-rating">
-                   <span className="kinopoisk">кинопоиск</span><br/>
-                   <span className="rating">{(item.rating.kp).toFixed(1)}</span>
-               </div>
+                   <span className="imdb">
+                     IMDb
+                   </span><br/>
+                   <span className="rating">
+                     {item.rating.imdb}
+                    </span>
+                 </div>
+                 <div className="inner-rating">
+                    <span className="sf">
+                      SF
+                    </span><br/>
+                    <span className="rating">
+                      {item.averageRating}
+                    </span>
+                 </div>
+                 <div className="kinopoisk-rating">
+                   <span className="kinopoisk">
+                     КИНОПОИСК
+                   </span><br/>
+                   <span className="rating">
+                     {(item.rating.kp).toFixed(1)}
+                   </span>
+                 </div>
                
-                 <img className="movie-image" 
-                 src={item.poster.url}
-                  alt="poster"></img>
+                 <Link className="name"
+                       to={{pathname:`/film/${item.id}`}}>
+                    <img className="movie-image" 
+                        src={item.poster.url}
+                        alt="poster">
+                    </img>
+                    {item.name}
+                  </Link>
                </div>
-               
                <div className="info-movie">
-                    <Link className="name"
-                     to={{pathname:`/film/${item.id}`}}>
-                       {item.name}
-                       </Link>
-                 
                  <p className="year">
-                   {item.year}</p>
+                   {item.year}
+                 </p>
                  <p className="short-description">
-                   {item.description.slice(0, 55) + '...'}</p>
+                   {item.description.slice(0, 55) + '...'}
+                 </p>
                </div>
             </div>
          } else return undefined
-        })
-    }
+    })
+}
 
-    return(
-        <div className="main">
-          <div className="menu">
+  return(
+      <div className="main">
+        <div className="menu">
           <CountryFilter 
              countryFilter={countryFilter}
              currentCountry={state.dataOfMovies.currentCountry}/>
@@ -264,18 +275,18 @@ export default function Main({
              yearFilter={yearFilter}
              currentYear={state.dataOfMovies.currentYear}/>
            <RatingImdbFilter 
-           resetPage={resetPage}
-            ratingImdbFilter={ratingImdbFilter} 
-            getIdSelect={getIdSelect}
-            idSelect={idSelect}
-            id={1}/>
+             resetPage={resetPage}
+             ratingImdbFilter={ratingImdbFilter} 
+             getIdSelect={getIdSelect}
+             idSelect={idSelect}
+             id={1}/>
            <RatingKpFilter
              ratingKpFilter={ratingKpFilter} 
              getIdSelect={getIdSelect}
              idSelect={idSelect}
              id={2}
              resetPage={resetPage}/>
-            <RatingInnerFilter
+           <RatingInnerFilter
              ratingInnerFilter={ratingInnerFilter}
              countryFilter={countryFilter}
              yearFilter={yearFilter}
@@ -284,13 +295,22 @@ export default function Main({
              id={3}
              resetPage={resetPage}
              /> 
+        </div>
+          <div id="movies">
+            {result}
           </div>
-            <div id="movies">{result}</div>
-            <div className="pagination-buttons">
-                 <PageDown decrement={decrement} style={style}/>
-                 <PageUp increment={increment} style={style1}/>
+          <div className="pagination-buttons">
+                 <PageDown
+                  decrement={decrement} 
+                  page={page}/>
+                 <PageUp 
+                 increment={increment}
+                 lastPage={lastPage}
+                  lengthOfArr={arr.length}
+                 pages={pages}/>
             </div>
         </div>
     )
 }
+
 
